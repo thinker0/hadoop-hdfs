@@ -15,12 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+syntax="proto2";
 option java_package = "org.apache.hadoop.hdfs.protocol.proto";
 option java_outer_classname = "XAttrProtos";
 option java_generate_equals_and_hash = true;
+option go_package = "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs";
 package hadoop.hdfs;
-  
+
 message XAttrProto {
   enum XAttrNamespaceProto {
     USER      = 0;
@@ -29,15 +30,10 @@ message XAttrProto {
     SYSTEM    = 3;
     RAW       = 4;
   }
-  
+
   required XAttrNamespaceProto namespace = 1;
   required string name = 2;
   optional bytes value = 3;
-}
-  
-message XAttrEditLogProto {
-  optional string src = 1;
-  repeated XAttrProto xAttrs = 2;
 }
 
 enum XAttrSetFlagProto {

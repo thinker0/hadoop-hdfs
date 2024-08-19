@@ -15,13 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+syntax="proto2";
 option java_package = "org.apache.hadoop.hdfs.protocol.proto";
 option java_outer_classname = "AclProtos";
 option java_generate_equals_and_hash = true;
+option go_package = "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs";
 package hadoop.hdfs;
 
-import "hdfs.proto";
+/**
+ * File or Directory permision - same spec as posix
+ */
+message FsPermissionProto {
+  required uint32 perm = 1;       // Actually a short - only 16bits used
+}
 
 message AclEntryProto {
   enum AclEntryScopeProto {
@@ -58,11 +64,7 @@ message AclStatusProto {
   required string group          = 2;
   required bool sticky           = 3;
   repeated AclEntryProto entries = 4;
-}
-
-message AclEditLogProto {
-  required string src            = 1;
-  repeated AclEntryProto entries = 2;
+  optional FsPermissionProto permission = 5;
 }
 
 message ModifyAclEntriesRequestProto {
