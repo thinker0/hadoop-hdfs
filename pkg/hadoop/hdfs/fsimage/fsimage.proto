@@ -18,7 +18,7 @@
 syntax = "proto2";
 option java_package = "org.apache.hadoop.hdfs.server.namenode";
 option java_outer_classname = "FsImageProto";
-option go_package = "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs/fsimage";
+option go_package = "github.com/thinker0/hadoop-hdfs/v2/pkg/hadoop/hdfs/fsimage";
 package hadoop.hdfs.fsimage;
 
 import "hdfs.proto";

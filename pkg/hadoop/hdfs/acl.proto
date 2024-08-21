@@ -19,7 +19,7 @@ syntax="proto2";
 option java_package = "org.apache.hadoop.hdfs.protocol.proto";
 option java_outer_classname = "AclProtos";
 option java_generate_equals_and_hash = true;
-option go_package = "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs";
+option go_package = "github.com/thinker0/hadoop-hdfs/v2/pkg/hadoop/hdfs";
 package hadoop.hdfs;
 
 /**

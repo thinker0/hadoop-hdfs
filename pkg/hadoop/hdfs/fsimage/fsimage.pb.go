@@ -24,7 +24,7 @@
 package fsimage
 
 import (
-	hdfs "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs"
+	hdfs "github.com/thinker0/hadoop-hdfs/v2/pkg/hadoop/hdfs"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

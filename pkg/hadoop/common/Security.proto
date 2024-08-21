@@ -26,7 +26,7 @@ option java_package = "org.apache.hadoop.security.proto";
 option java_outer_classname = "SecurityProtos";
 option java_generic_services = true;
 option java_generate_equals_and_hash = true;
-option go_package = "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/common";
+option go_package = "github.com/thinker0/hadoop-hdfs/v2/pkg/hadoop/common";
 package hadoop.common;
 
 /**
