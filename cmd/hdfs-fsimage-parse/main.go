@@ -3,8 +3,10 @@ package main
 import (
 	"bytes"
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	pb "github.com/thinker0/hadoop-hdfs/hdfs/v2/pkg/hadoop/hdfs/fsimage"
+	"go.uber.org/zap"
 	"google.golang.org/protobuf/proto"
 	"io"
 	"log"
@@ -25,7 +27,34 @@ func logIfErr(err error) {
 	}
 }
 
+func init() {
+	log.SetFlags(log.Lshortfile)
+}
+
 func main() {
+	sampleJSON := []byte(`{
+       "level" : "info",
+       "encoding": "json",
+       "outputPaths":["stdout", "log.log"],
+       "errorOutputPaths":["stderr"],
+       "encoderConfig": {
+           "messageKey":"message",
+           "levelKey":"level",
+           "levelEncoder":"lowercase"
+       }
+   }`)
+	var cfg zap.Config
+
+	if err := json.Unmarshal(sampleJSON, &cfg); err != nil {
+		panic(err)
+	}
+
+	logger, err := cfg.Build()
+
+	if err != nil {
+		panic(err)
+	}
+	defer logger.Sync()
 	fileName := os.Args[1]
 	fInfo, err := os.Stat(fileName)
 	logIfErr(err)
@@ -58,6 +87,7 @@ func main() {
 	for _, c := range paths {
 		if len(c) != 0 {
 			p++
+			log.Println(c)
 		}
 	}
 	fmt.Println("No of Paths: ", p)
@@ -147,6 +177,7 @@ func parseFileSummary(imageFile *os.File, fileLength int64, fSummaryLength int32
 	}
 
 	for _, value := range fileSummary.GetSections() {
+		log.Printf("Section Name: %s:%v", value.GetName(), value)
 		sectionMap[value.GetName()] = value
 	}
 	return sectionMap
