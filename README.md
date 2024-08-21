@@ -4,22 +4,25 @@ A Golang port of https://github.com/sebinjohn/hdfs-fsimage-parse
 ## First Steps
 
 ```
-$ export GOPATH=`pwd`
 $ protoc \
-	--go_out=${GOPATH}/pkg \
-	-Ipkg/hadoop/common pkg/hadoop/common/Security.proto
+	--go_out=pkg/hadoop/common \
+	--go_opt=paths=source_relative \
+	-Ipkg/hadoop/common \
+	pkg/hadoop/common/Security.proto
 
-$ protoc --proto_path=pkg/hadoop/hdfs \
+$ protoc \
+    --proto_path=pkg/hadoop/hdfs \
     --proto_path=pkg/hadoop/common \
-	--go_out=${GOPATH}/pkg \
-	-I${GOPATH}/pkg \
+	--go_out=./pkg/hadoop/hdfs \
 	-Ipkg/hadoop/hdfs -Ipkg/hadoop/common \
+	--go_opt=paths=source_relative \
 	 pkg/hadoop/hdfs/*.proto
 
 $ protoc \
-	--go_out=${GOPATH}/pkg \
+	--go_out=./pkg/hadoop/hdfs \
 	-Ipkg/hadoop/hdfs \
 	-Ipkg/hadoop/common \
+	--go_opt=paths=source_relative \
 	pkg/hadoop/hdfs/fsimage/fsimage.proto
 ```
 
